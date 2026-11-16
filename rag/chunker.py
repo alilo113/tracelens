@@ -1,3 +1,5 @@
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 def read_log_file():
     logs = []
     with open("../data/sample_incident.log", "r", encoding="utf-8") as file:
@@ -6,4 +8,13 @@ def read_log_file():
 
     return logs
 
-print(read_log_file())
+def chunk_logs():
+    logs = read_log_file()
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len,
+    )
+    
+    chunks = text_splitter.split_text("\n".join(logs))
+    return chunks
