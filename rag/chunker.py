@@ -12,7 +12,7 @@ def chunk_logs():
     logs = read_log_file()
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,
-        chunk_overlap=200,
+        chunk_overlap=10,
         length_function=len,
     )
     
